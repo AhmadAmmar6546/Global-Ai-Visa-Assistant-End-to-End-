@@ -1,9 +1,20 @@
 # Publish on Vercel
 
-The repository now includes native Next.js Vercel configuration. A public site
-has not been created yet: Vercel authentication and a hosted database are
-external prerequisites. Publishing the Codex cloud environment snapshots the
-development workspace; it does not publish this website.
+The application is live at
+[https://global-ai-visa-assistant-end-to-end-alpha.vercel.app](https://global-ai-visa-assistant-end-to-end-alpha.vercel.app).
+Production deployment `dpl_DcevnUh7DhqxKVFtcMQ8zHYB38fK` is READY and serves
+commit `815cedc`. HTTPS page and asset requests passed, `/api/health` reported
+the database connected, `/api/sources` returned five sources, and the private
+applications API rejected an anonymous request with HTTP 401.
+
+`EMAIL_FROM` currently uses Resend's test sender, `onboarding@resend.dev`, which
+restricts test email to the Resend account owner's address. Verify a sending
+domain and update `EMAIL_FROM` before onboarding other users. Live verification
+and password-reset email delivery have not been tested.
+
+The repository includes native Next.js Vercel configuration. Publishing the
+Codex cloud environment snapshots the development workspace; it does not
+publish this website.
 
 ## Required service settings
 

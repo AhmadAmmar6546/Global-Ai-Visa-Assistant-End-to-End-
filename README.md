@@ -2,6 +2,8 @@
 
 A working visa preparation MVP built from the **Global AI Visa Assistant End-to-End Blueprint**. Applicants can create study visa cases, organize manual checklists, save in-app reminders, ask a source-aware assistant, and practice interview answers without uploading documents.
 
+**Live app:** <https://global-ai-visa-assistant-end-to-end-alpha.vercel.app>. Public pages and the hosted database passed HTTPS checks. Email currently uses Resend's test sender; verification mail is limited to the Resend account owner's email until a sending domain is verified. Live email delivery has not been tested.
+
 The initial interface is English. Destinations are Italy, Germany, the United Kingdom, Canada, and Australia. Seeded checklists are **educational demonstrations** for a Pakistani national living in Pakistan with Islamabad jurisdiction. They are not official visa requirements. Other profiles display **UNKNOWN** until an administrator reviews matching source material. No part of the app guarantees eligibility or approval.
 
 ## Run locally

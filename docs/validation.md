@@ -15,7 +15,9 @@ fixtures are removed by the test cleanup.
 | Desktop and mobile Chromium E2E | 2 tests passed; actual signup, verification, no-upload case, checklist persistence, source notices and UNKNOWN profile handling. |
 | `npm audit --omit=dev` | Zero reported runtime dependency vulnerabilities. |
 | Docker application image | Built successfully; standalone runtime passed database health, source-directory reads and landing-page requests. |
-| Vercel deployment preparation | Local build wrapper, 12 origin checks, and failure on missing production email settings passed. Hosted deployment is still pending account/service access. |
+| Vercel deployment preparation | Local build wrapper, 12 origin checks, and failure on missing production email settings passed. |
+| Hosted Vercel deployment | Production deployment of `815cedc` reached `READY` on 12 October 2026; hosted migrations and seed completed. |
+| Public HTTPS smoke | Landing, login and registration pages returned 200; all 10 referenced CSS/JS assets returned 200. `/api/health` returned `database: connected`, `/api/sources` returned five sources, and anonymous `/api/applications` returned 401. No production accounts were created or email sent. |
 
 The pinned `deepmerge-ts` override removes its reported runtime advisory and was
 checked against Prisma config loading, client generation and migrations. A full
@@ -29,7 +31,14 @@ as the optional `build_ca` BuildKit mount, and a Docker host mapping for the
 proxy hostname because Docker bridge DNS could not resolve it. These are build
 environment settings; no proxy credentials or CA data are committed.
 
+The public application is available at
+<https://global-ai-visa-assistant-end-to-end-alpha.vercel.app>.
+Production browser rendering was not verified because local Chromium lacked the
+environment proxy CA; HTTPS requests kept certificate verification enabled.
+The configured Resend test sender can only deliver to the Resend account owner;
+a verified sending domain is required for other recipients.
+
 Live email delivery, cloud AI responses, official legal-source verification,
-public hosting and a fresh cloud snapshot restore were not validated. Demo rules
+and a fresh cloud snapshot restore were not validated. Demo rules
 remain unverified. GitHub CI configuration is included; this local record does
 not claim that a remote GitHub Actions run has completed.
