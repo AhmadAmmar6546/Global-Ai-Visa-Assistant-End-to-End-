@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "installCommand": "npm ci --include=dev --ignore-scripts",
+  "buildCommand": "npm run build:vercel",
+  "ignoreCommand": "node -e \"process.exit(process.env.VERCEL_ENV === 'preview' ? 0 : 1)\""
+}

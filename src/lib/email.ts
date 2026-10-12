@@ -1,6 +1,7 @@
 import { AppError } from "@/lib/http";
+import { resolveAppUrl } from "@/lib/app-url";
 
-export function appUrl() { return process.env.APP_URL || "http://localhost:3000"; }
+export function appUrl() { return resolveAppUrl(); }
 export function emailConfigured() { return Boolean(process.env.RESEND_API_KEY && process.env.EMAIL_FROM); }
 export async function deliverAuthEmail(email: string, url: string, kind: "verify" | "reset") {
   if (!emailConfigured()) {

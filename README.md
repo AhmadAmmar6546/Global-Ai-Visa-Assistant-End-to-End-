@@ -36,6 +36,7 @@ The public landing page and `/sources` require no account. After signing in, `/d
 
 ```bash
 npm run typecheck
+npm run test:deployment
 npm run lint
 npm run build
 # Keep the local app running in another terminal, with the same DATABASE_URL.
@@ -64,6 +65,7 @@ This is an MVP, not a production compliance certification. Document uploads/OCR,
 - [API contract](docs/api.md)
 - [Privacy, threats, and operator responsibilities](docs/privacy-and-security.md)
 - [Deployment and release checks](docs/deployment.md)
+- [Vercel publishing steps](docs/vercel.md)
 - [Validation results](docs/validation.md)
 
 Before a public launch, configure real email delivery and TLS, replace development credentials, perform independent security and source reviews, establish backup/restore and privacy procedures, and validate provider configuration. Do not advertise external services as working until their own sandbox checks pass.

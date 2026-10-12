@@ -15,6 +15,7 @@ fixtures are removed by the test cleanup.
 | Desktop and mobile Chromium E2E | 2 tests passed; actual signup, verification, no-upload case, checklist persistence, source notices and UNKNOWN profile handling. |
 | `npm audit --omit=dev` | Zero reported runtime dependency vulnerabilities. |
 | Docker application image | Built successfully; standalone runtime passed database health, source-directory reads and landing-page requests. |
+| Vercel deployment preparation | Local build wrapper, 12 origin checks, and failure on missing production email settings passed. Hosted deployment is still pending account/service access. |
 
 The pinned `deepmerge-ts` override removes its reported runtime advisory and was
 checked against Prisma config loading, client generation and migrations. A full

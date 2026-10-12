@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
+    "build:vercel": "tsx scripts/vercel-build.ts",
     "start": "next start --hostname 0.0.0.0",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
@@ -17,6 +18,7 @@
     "db:studio": "prisma studio",
     "admin:grant": "tsx scripts/grant-admin.ts",
     "test:integration": "tsx tests/integration/api.ts",
+    "test:deployment": "tsx tests/deployment/app-url.ts",
     "test:e2e": "playwright test",
     "setup": "bash scripts/setup.sh",
     "postinstall": "prisma generate"
