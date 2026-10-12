@@ -1,0 +1,176 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String @id @default(uuid())
+  email        String @unique
+  name         String
+  passwordHash String
+  role         String @default("APPLICANT")
+  emailVerifiedAt DateTime?
+  aiConsent    Boolean @default(false)
+  notificationConsent Boolean @default(false)
+  createdAt    DateTime @default(now())
+  sessions     Session[]
+  tokens       AuthToken[]
+  applications Application[]
+  audits       AuditLog[]
+}
+
+model Session {
+  id        String @id @default(uuid())
+  tokenHash String @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+}
+
+model AuthToken {
+  id        String @id @default(uuid())
+  tokenHash String @unique
+  userId    String
+  kind      String
+  expiresAt DateTime
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+}
+
+model Application {
+  id           String @id @default(uuid())
+  ownerId      String
+  destination  String
+  nationality  String
+  residence    String
+  jurisdiction String
+  visaType     String @default("study")
+  purpose      String
+  intendedDate DateTime?
+  status       String @default("PREPARING")
+  profileVersion Int @default(1)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  owner        User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  checklist    ChecklistItem[]
+  tasks        Task[]
+  messages     Message[]
+  versions     ProfileVersion[]
+  interviews   InterviewAnswer[]
+  @@index([ownerId, updatedAt])
+}
+
+model ProfileVersion {
+  id            String @id @default(uuid())
+  applicationId String
+  version       Int
+  profile       Json
+  createdAt     DateTime @default(now())
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  @@unique([applicationId, version])
+}
+
+model Source {
+  id           String @id @default(uuid())
+  destination  String
+  title        String
+  url          String @unique
+  official     Boolean @default(true)
+  fetchedAt    DateTime?
+  checksum     String?
+  excerpt      String @default("")
+  createdAt    DateTime @default(now())
+  rules        Rule[]
+}
+
+model Rule {
+  id           String @id @default(uuid())
+  sourceId     String
+  destination  String
+  nationality  String @default("PK")
+  residence    String @default("PK")
+  jurisdiction String
+  visaType     String @default("study")
+  title        String
+  description  String
+  sourceExcerpt String
+  reviewStatus String @default("DRAFT")
+  isDemo       Boolean @default(false)
+  version      Int @default(1)
+  verifiedAt   DateTime?
+  validUntil   DateTime?
+  reviewedBy   String?
+  createdAt    DateTime @default(now())
+  source       Source @relation(fields: [sourceId], references: [id], onDelete: Restrict)
+  checklist    ChecklistItem[]
+  @@index([destination, nationality, residence, jurisdiction, visaType, reviewStatus])
+}
+
+model ChecklistItem {
+  id            String @id @default(uuid())
+  applicationId String
+  ruleId        String
+  status        String @default("NOT_STARTED")
+  notes         String @default("")
+  reason        String @default("")
+  updatedAt     DateTime @updatedAt
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  rule          Rule @relation(fields: [ruleId], references: [id], onDelete: Restrict)
+  @@unique([applicationId, ruleId])
+}
+
+model Task {
+  id            String @id @default(uuid())
+  applicationId String
+  title         String
+  dueAt         DateTime?
+  completed     Boolean @default(false)
+  createdAt     DateTime @default(now())
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  @@index([applicationId, dueAt])
+}
+
+model Message {
+  id            String @id @default(uuid())
+  applicationId String
+  role          String
+  content       String
+  citations     Json @default("[]")
+  createdAt     DateTime @default(now())
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  @@index([applicationId, createdAt])
+}
+
+model InterviewAnswer {
+  id            String @id @default(uuid())
+  applicationId String
+  question      String
+  answer        String
+  feedback      String
+  createdAt     DateTime @default(now())
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id          String @id @default(uuid())
+  actorId     String?
+  action      String
+  resourceId  String?
+  metadata    Json @default("{}")
+  createdAt   DateTime @default(now())
+  actor       User? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  @@index([actorId, createdAt])
+}
+
+model RateLimit {
+  key      String @id
+  count    Int @default(1)
+  resetsAt DateTime
+}
