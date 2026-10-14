@@ -39,6 +39,7 @@ The public landing page and `/sources` require no account. After signing in, `/d
 ```bash
 npm run typecheck
 npm run test:deployment
+npm run test:email
 npm run lint
 npm run build
 # Keep the local app running in another terminal, with the same DATABASE_URL.

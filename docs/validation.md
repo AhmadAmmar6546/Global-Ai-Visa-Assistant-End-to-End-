@@ -18,6 +18,8 @@ fixtures are removed by the test cleanup.
 | Vercel deployment preparation | Local build wrapper, 12 origin checks, and failure on missing production email settings passed. |
 | Hosted Vercel deployment | Production deployment of `815cedc` reached `READY` on 12 October 2026; hosted migrations and seed completed. |
 | Public HTTPS smoke | Landing, login and registration pages returned 200; all 10 referenced CSS/JS assets returned 200. `/api/health` returned `database: connected`, `/api/sources` returned five sources, and anonymous `/api/applications` returned 401. No production accounts were created or email sent. |
+| Email failure diagnostics, 14 October 2026 | Mocked email transport checks passed for provider failures, malformed responses, network errors, timeouts and missing configuration. Logs and public errors did not expose keys, recipients or reset links. No live email was sent. |
+| Password recovery UI, 14 October 2026 | Desktop and mobile Chromium checks passed: visible recovery button, email form, confirmation screen, return to login and missing-token reset screen. Email requests were mocked; no real email was sent. Build, typecheck and lint passed. |
 
 The pinned `deepmerge-ts` override removes its reported runtime advisory and was
 checked against Prisma config loading, client generation and migrations. A full

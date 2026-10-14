@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Eye, EyeOff, LoaderCircle } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, KeyRound, LoaderCircle } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { api, type PublicUser } from "@/lib/client";
 import { AuthFrame } from "../auth-frame";
@@ -61,9 +61,7 @@ export default function LoginPage() {
           />
         </label>
         <label className="field">
-          <span className="field-label-row">
-            Password <Link href="/forgot-password">Forgot password?</Link>
-          </span>
+          <span>Password</span>
           <span className="password-input">
             <input
               aria-label="Password"
@@ -94,6 +92,12 @@ export default function LoginPage() {
           {!pending && <ArrowRight size={18} />}
         </button>
       </form>
+      <Link
+        className="button button-secondary auth-submit auth-recovery"
+        href="/forgot-password"
+      >
+        <KeyRound size={18} /> Forgot password?
+      </Link>
       <p className="auth-switch">
         New to Visa Compass? <Link href="/register">Create an account</Link>
       </p>

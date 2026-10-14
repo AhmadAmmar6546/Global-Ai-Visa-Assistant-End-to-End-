@@ -19,6 +19,7 @@
     "admin:grant": "tsx scripts/grant-admin.ts",
     "test:integration": "tsx tests/integration/api.ts",
     "test:deployment": "tsx tests/deployment/app-url.ts",
+    "test:email": "tsx tests/deployment/email.ts",
     "test:e2e": "playwright test",
     "setup": "bash scripts/setup.sh",
     "postinstall": "prisma generate"

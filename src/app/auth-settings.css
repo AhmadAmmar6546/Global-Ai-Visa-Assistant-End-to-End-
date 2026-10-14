@@ -58,6 +58,7 @@
 .auth-card .notice p { margin: 6px 0 12px; }
 .auth-card .notice strong { display: block; }
 .auth-submit { width: 100%; justify-content: center; margin-top: 5px; }
+.auth-recovery { margin-top: 14px; }
 .auth-switch { text-align: center; color: #737e7a; font-size: 13px; margin-top: 29px; }
 .auth-switch a { color: #217567; font-weight: 550; display: inline-flex; gap: 7px; align-items: center; }
 .auth-disclaimer { width: 100%; max-width: 360px; text-align: center; font-size: 11px; color: #89928b; line-height: 1.75; margin: 52px 0 0; }

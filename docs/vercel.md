@@ -2,8 +2,8 @@
 
 The application is live at
 [https://global-ai-visa-assistant-end-to-end-alpha.vercel.app](https://global-ai-visa-assistant-end-to-end-alpha.vercel.app).
-Production deployment `dpl_DcevnUh7DhqxKVFtcMQ8zHYB38fK` is READY and serves
-commit `815cedc`. HTTPS page and asset requests passed, `/api/health` reported
+The first verified production deployment, `dpl_DcevnUh7DhqxKVFtcMQ8zHYB38fK`,
+reached READY with commit `815cedc` on 12 October 2026. HTTPS page and asset requests passed, `/api/health` reported
 the database connected, `/api/sources` returned five sources, and the private
 applications API rejected an anonymous request with HTTP 401.
 
@@ -11,6 +11,14 @@ applications API rejected an anonymous request with HTTP 401.
 restricts test email to the Resend account owner's address. Verify a sending
 domain and update `EMAIL_FROM` before onboarding other users. Live verification
 and password-reset email delivery have not been tested.
+
+If verification or reset emails do not arrive, check Resend's Emails page and
+Vercel runtime logs for `auth_email_failed`. Logs contain the provider HTTP
+status and a recognised error name, or `network_error`/`timeout`; they omit
+provider messages, recipient addresses, API keys and account links. A failed
+send still needs an active Production email key and a permitted sender. After
+updating environment variables, redeploy and request a new verification link
+from account Settings instead of repeatedly registering the same account.
 
 The repository includes native Next.js Vercel configuration. Publishing the
 Codex cloud environment snapshots the development workspace; it does not
